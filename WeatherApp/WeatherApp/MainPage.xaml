@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp.MainPage">
 
@@ -19,6 +19,20 @@
                 </FormattedString>
             </Label.FormattedText>
         </Label>
+    </StackLayout>
+
+</ContentPage>-->
+
+    
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WeatherApp"
+             x:Class="WeatherApp.MainPage"
+             Title="Weather App">
+
+    <StackLayout Spacing="10" Padding="20" BackgroundColor="#f3f3fa">
+        <Label Text="WeatherApp" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="22"/>
+        <Label Text="Lik Eduard" VerticalOptions="StartAndExpand" HorizontalOptions="Center" FontSize="12"/>
     </StackLayout>
 
 </ContentPage>

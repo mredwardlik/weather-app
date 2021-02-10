@@ -35,9 +35,9 @@
         <Label x:Name="Author" Text="Lik Eduard" VerticalOptions="StartAndExpand" HorizontalOptions="Center" FontSize="12"/>
     </StackLayout>-->
 
-    <StackLayout>
+    <StackLayout Margin="50" Orientation="Vertical">
         <Label x:Name="label" Text="Value is" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="20"></Label>
-        <Slider x:Name="slider" VerticalOptions="StartAndExpand" BackgroundColor="Azure" Minimum="0" Maximum="10" Value="5" ValueChanged="slider_ValueChanged"></Slider>
+        <Slider x:Name="slider" VerticalOptions="StartAndExpand" Minimum="0" Maximum="10" Value="5" ValueChanged="slider_ValueChanged"></Slider>
     </StackLayout>
 
 </ContentPage>

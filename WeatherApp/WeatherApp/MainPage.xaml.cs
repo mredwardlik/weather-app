@@ -14,5 +14,10 @@ namespace WeatherApp
         {
             InitializeComponent();
         }
+
+        private void slider_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            label.Text = String.Format("Value is {0}", e.NewValue);
+        }
     }
 }

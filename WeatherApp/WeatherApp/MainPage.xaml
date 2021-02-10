@@ -23,16 +23,21 @@
 
 </ContentPage>-->
 
-    
+
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:WeatherApp"
              x:Class="WeatherApp.MainPage"
              Title="Weather App">
 
-    <StackLayout Spacing="10" Padding="20" BackgroundColor="#f3f3fa">
-        <Label Text="WeatherApp" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="22"/>
-        <Label Text="Lik Eduard" VerticalOptions="StartAndExpand" HorizontalOptions="Center" FontSize="12"/>
+    <!--<StackLayout Spacing="10" Padding="20" BackgroundColor="#f3f3fa">
+        <Label x:Name="Header" Text="WeatherApp" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="22"/>
+        <Label x:Name="Author" Text="Lik Eduard" VerticalOptions="StartAndExpand" HorizontalOptions="Center" FontSize="12"/>
+    </StackLayout>-->
+
+    <StackLayout>
+        <Label x:Name="label" Text="Value is" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="20"></Label>
+        <Slider x:Name="slider" VerticalOptions="StartAndExpand" BackgroundColor="Azure" Minimum="0" Maximum="10" Value="5" ValueChanged="slider_ValueChanged"></Slider>
     </StackLayout>
 
 </ContentPage>

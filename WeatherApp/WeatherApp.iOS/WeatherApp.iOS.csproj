@@ -214,4 +214,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\cloud.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menu1.jpg" />
+  </ItemGroup>
 </Project>

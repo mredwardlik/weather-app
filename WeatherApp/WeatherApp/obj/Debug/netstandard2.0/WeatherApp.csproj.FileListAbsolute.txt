@@ -13,3 +13,4 @@ C:\Users\admin\Desktop\Projects\weather-app\WeatherApp\WeatherApp\obj\Debug\nets
 C:\Users\admin\Desktop\Projects\weather-app\WeatherApp\WeatherApp\obj\Debug\netstandard2.0\ref\WeatherApp.dll
 C:\Users\admin\Desktop\Projects\weather-app\WeatherApp\WeatherApp\obj\Debug\netstandard2.0\WeatherApp.pdb
 C:\Users\admin\Desktop\Projects\weather-app\WeatherApp\WeatherApp\obj\Debug\netstandard2.0\Views\WeatherAppPage.xaml.g.cs
+C:\Users\admin\Desktop\Projects\weather-app\WeatherApp\WeatherApp\obj\Debug\netstandard2.0\Views\PopupView.xaml.g.cs

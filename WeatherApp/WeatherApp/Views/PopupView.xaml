@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WeatherApp.Views.PopupView"
+             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup">
+    <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+        <Label Text="WeatherApp" HorizontalOptions="Center" TextColor="White" FontSize="40"/>
+        <Label Text="Write something about us:" HorizontalOptions="Center" TextColor="White" FontSize="20"/>
+        <Entry x:Name="entryAbout"/>
+    </StackLayout>
+</pages:PopupPage>

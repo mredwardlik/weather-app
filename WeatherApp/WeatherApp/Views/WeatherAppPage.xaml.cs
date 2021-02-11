@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rg.Plugins.Popup.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace WeatherApp.Views
         public WeatherAppPage()
         {
             InitializeComponent();
+        }
+
+        private void ShowPopup(object sender, EventArgs e)
+        {
+            PopupNavigation.Instance.PushAsync(new PopupView());
         }
     }
 }

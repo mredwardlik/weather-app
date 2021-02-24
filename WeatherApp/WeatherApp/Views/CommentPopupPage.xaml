@@ -6,7 +6,7 @@
     <StackLayout Padding="10" Spacing="10" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
         <Label Text="WeatherApp" VerticalTextAlignment="Center" HorizontalOptions="Center" TextColor="White" FontSize="25" FontFamily=""/>
         <Label Text="Write something about us:" HorizontalOptions="Center" TextColor="White" FontSize="15"/>
-        <Entry x:Name="entrySend" TextColor="Cornsilk"/>
-        <Button Text="Sensd" FontSize="Small" BorderWidth="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="200" Opacity="1" BackgroundColor="Cornsilk" Clicked="Button_Clicked"/>
+        <Entry x:Name="commentEntry" TextColor="Cornsilk"/>
+        <Button Text="Send" FontSize="Small" BorderWidth="1" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" WidthRequest="200" Opacity="1" BackgroundColor="Cornsilk" Clicked="Button_Clicked"/>
     </StackLayout>
 </pages:PopupPage>

@@ -7,22 +7,28 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using WeatherApp.Helper;
 
 namespace WeatherApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CommentPopupPage : PopupPage
     {
-        public String SendData;
         public CommentPopupPage()
         {
             InitializeComponent();
-            entrySend.Text = SendData;
+            commentEntry.Text = CommentPopupPageState.CommentText;
+        }
+
+        protected override bool OnBackgroundClicked()
+        {
+            CommentPopupPageState.CommentText = commentEntry.Text;
+            return base.OnBackgroundClicked();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            SendData = entrySend.Text;
+            commentEntry.Text = "";
         }
     }
 }

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "JqU+aHuqk7ycw9a7v9xsOIFPOU6x7uE7hAfX8UGRfef4atIQ5ri1mvXD1kNjgd7nOPV2i9gQuJlBW7sn20tplQ==",
+  "dgSpecHash": "uToBM8LwLtaAsrrF1NGzD+6yeAROSwBzh2Aw7D+yQJMnHGXFGkHBtX/E5FJYXWGidaAJw4+nNjds6baYip6eOA==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\Desktop\\Projects\\weather-app\\WeatherApp\\WeatherApp.Android\\WeatherApp.Android.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\rg.plugins.popup\\2.0.0.10\\rg.plugins.popup.2.0.0.10.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.arch.core.common\\1.1.1.3\\xamarin.android.arch.core.common.1.1.1.3.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.android.arch.core.runtime\\1.1.1.3\\xamarin.android.arch.core.runtime.1.1.1.3.nupkg.sha512",

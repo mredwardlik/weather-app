@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "rU78jernv8AHO05iML+KF2AtPyQCkTU66njdH24XO8x4/Q2ii2Nz6RdfstqIEAmnzrkF3ieIFzMtlCCL7zOFdA==",
+  "dgSpecHash": "eQPMMJrFvGdwPrwxpJsS6OsJvysqJ4aexftYQboPhubIS+lYEoP4X4vyrclHKiWNtx7BlA6+CT2Ob5wJ0M5Ntw==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\Desktop\\Projects\\weather-app\\WeatherApp\\WeatherApp.iOS\\WeatherApp.iOS.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\rg.plugins.popup\\2.0.0.10\\rg.plugins.popup.2.0.0.10.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.forms\\4.8.0.1451\\xamarin.forms.4.8.0.1451.nupkg.sha512"

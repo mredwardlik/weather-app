@@ -11,11 +11,18 @@ using Xamarin.Forms.Xaml;
 namespace WeatherApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PopupView : PopupPage
+    public partial class CommentPopupPage : PopupPage
     {
-        public PopupView()
+        public String SendData;
+        public CommentPopupPage()
         {
             InitializeComponent();
+            entrySend.Text = SendData;
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            SendData = entrySend.Text;
         }
     }
 }

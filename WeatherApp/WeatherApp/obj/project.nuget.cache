@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "7/YOCtfpVMyUtOe1l7xtNg81bTFkKYmsnI7Veiyt+6WcYeSYIcADbhfRA5eFxT87Tr/CCho2gnHDvj+0skbfNQ==",
+  "dgSpecHash": "kEXoS2MA8M0OljWxflye1J9Bctf1dK+A0Q7S0yeIlZmFTYRCgigmAoGD2n7/+z9bDvKEAc5RGj62xHI4Bt77TQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\Desktop\\Projects\\weather-app\\WeatherApp\\WeatherApp\\WeatherApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\admin\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\rg.plugins.popup\\2.0.0.10\\rg.plugins.popup.2.0.0.10.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Microsoft\\Xamarin\\NuGet\\xamarin.essentials\\1.5.3.2\\xamarin.essentials.1.5.3.2.nupkg.sha512",

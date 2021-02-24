@@ -11,24 +11,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.10" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1451" />
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-    <Folder Include="Helper\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Compile Update="Views\CommentPopupPage.xaml.cs">
+      <DependentUpon>CommentPopupPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\WeatherAppPage.xaml.cs">
       <DependentUpon>WeatherAppPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\PopupView.xaml">
+    <EmbeddedResource Update="Views\CommentPopupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\WeatherAppPage.xaml">

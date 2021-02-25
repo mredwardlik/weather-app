@@ -1,5 +1,6 @@
 ﻿using Rg.Plugins.Popup.Pages;
 using System;
+using System.Windows;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,12 +18,15 @@ namespace WeatherApp.Views
         public CommentPopupPage()
         {
             InitializeComponent();
-            commentEntry.Text = CommentPopupPageState.CommentText;
+            //commentEntry.Text = CommentPopupPageState.CommentText;
+            commentEntry.Text = Application.Current.Properties.ContainsKey("CommentText") ? (string)Application.Current.Properties["CommentText"] : "";
+            
         }
 
         protected override bool OnBackgroundClicked()
         {
-            CommentPopupPageState.CommentText = commentEntry.Text;
+            //CommentPopupPageState.CommentText = commentEntry.Text;
+            Application.Current.Properties["CommentText"] = commentEntry.Text;
             return base.OnBackgroundClicked();
         }
 

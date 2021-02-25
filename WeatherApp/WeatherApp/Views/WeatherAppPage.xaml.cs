@@ -44,7 +44,7 @@ namespace WeatherApp.Views
                     windTxt.Text = $"{weatherInfo.wind.speed} m/s";
                     cloudinessTxt.Text = $"{weatherInfo.clouds.all}%";
 
-                    var dt = new DateTime().ToUniversalTime().AddSeconds(weatherInfo.dt);
+                    var dt = DateTime.Now;
                     dateTxt.Text = dt.ToString("dddd, MMM dd").ToUpper();
 
                     GetForecast();

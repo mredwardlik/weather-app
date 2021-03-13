@@ -9,6 +9,7 @@ using WeatherApp.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using WeatherApp.Models;
+using Xamarin.Essentials;
 
 namespace WeatherApp.Views
 {
@@ -18,11 +19,48 @@ namespace WeatherApp.Views
         public WeatherAppPage()
         {
             InitializeComponent();
-            GetWeatherInfo();
+            GetCordinates();
         }
 
         private string Location = "Almaty";
         private string AppID = "1bc7a8f1bdfa33af739f7b6720664c31";
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+
+        private async void GetCordinates()
+        {
+            try
+            {
+                var request = new Xamarin.Essentials.GeolocationRequest(Xamarin.Essentials.GeolocationAccuracy.Best);
+                var location = await Geolocation.GetLocationAsync(request);
+
+                if (location != null)
+                {
+                    Latitude = location.Latitude;
+                    Longitude = location.Longitude;
+                    Location = await GetCity(location);
+
+                    GetWeatherInfo();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+        }
+
+        private async Task<string> GetCity(Location location)
+        {
+            var places = await Geocoding.GetPlacemarksAsync(location);
+            var currentPlace = places?.FirstOrDefault();
+
+            if (currentPlace != null)
+            {
+                return $"{currentPlace.Locality},{currentPlace.CountryName}";
+            }
+
+            return null;
+        }
 
         private async void GetWeatherInfo()
         {

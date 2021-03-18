@@ -19,13 +19,23 @@ namespace WeatherApp.Views
         public WeatherAppPage()
         {
             InitializeComponent();
-            GetCordinates();
+            RefreshPage();
         }
 
         private string Location = "Almaty";
         private string AppID = "1bc7a8f1bdfa33af739f7b6720664c31";
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+
+        private async void RefreshPage()
+        {
+            while (true)
+            {
+                GetCordinates();
+                GetBackground();
+                await Task.Delay(10000);
+            }
+        }
 
         private async void GetCordinates()
         {

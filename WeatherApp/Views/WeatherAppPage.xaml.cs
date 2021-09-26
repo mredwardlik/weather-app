@@ -23,7 +23,7 @@ namespace WeatherApp.Views
         }
 
         private string Location = "Almaty";
-        private string AppID = "1bc7a8f1bdfa33af739f7b6720664c31";
+        private string AppID = "";
         public double Latitude { get; set; }
         public double Longitude { get; set; }
 
@@ -76,7 +76,7 @@ namespace WeatherApp.Views
         {
             var url = $"https://api.pexels.com/v1/search?query={Location}&per_page=15&page=1";
 
-            var result = await ApiCaller.Get(url, "563492ad6f91700001000001712e1f49adae4d868f32c522f22fd4a7");
+            var result = await ApiCaller.Get(url, "");
 
             if (result.Successful)
             {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:WeatherApp.ViewModels"
+             x:Class="WeatherApp.Views.DayTile"
+             x:DataType="vm:DayItem">
+    <Grid>
+        <BoxView BackgroundColor="#758ABA" Opacity="{Binding Opacity}" />
+        <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+            <Label Text="{Binding DayName}" TextColor="White" FontSize="13" HorizontalOptions="Center" />
+            <Label Text="{Binding Date}" TextColor="White" FontSize="10" Opacity="0.85" HorizontalOptions="Center" />
+            <Image Source="{Binding Icon}" WidthRequest="34" HeightRequest="34" Margin="0,12" />
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="6">
+                <Label Text="{Binding Max, StringFormat='{0}°'}" TextColor="White" FontSize="22" />
+                <Label Text="{Binding Min, StringFormat='{0}°'}" TextColor="White" FontSize="14"
+                       Opacity="0.7" VerticalOptions="End" Margin="0,0,0,3" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

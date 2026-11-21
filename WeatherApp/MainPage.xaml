@@ -1,43 +1,189 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="WeatherApp.MainPage">
-
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
-
-</ContentPage>-->
-
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:WeatherApp"
+             xmlns:core="clr-namespace:WeatherApp.Core;assembly=WeatherApp.Core"
+             xmlns:vm="clr-namespace:WeatherApp.ViewModels"
+             xmlns:views="clr-namespace:WeatherApp.Views"
              x:Class="WeatherApp.MainPage"
-             Title="Weather App">
+             x:DataType="vm:MainViewModel"
+             Shell.NavBarIsVisible="False"
+             BackgroundColor="{Binding SkyTop}">
 
-    <!--<StackLayout Spacing="10" Padding="20" BackgroundColor="#f3f3fa">
-        <Label x:Name="Header" Text="WeatherApp" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="22"/>
-        <Label x:Name="Author" Text="Lik Eduard" VerticalOptions="StartAndExpand" HorizontalOptions="Center" FontSize="12"/>
-    </StackLayout>-->
+    <ContentPage.Resources>
+        <Style x:Key="Caption" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="Opacity" Value="0.85" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="Value" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+        <Style x:Key="IconButton" TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="44" />
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Padding" Value="11" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="CornerRadius" Value="22" />
+        </Style>
+    </ContentPage.Resources>
 
-    <StackLayout Margin="50" Orientation="Vertical">
-        <Label x:Name="label" Text="Value is" VerticalOptions="EndAndExpand" HorizontalOptions="Center" FontSize="20"></Label>
-        <Slider x:Name="slider" VerticalOptions="StartAndExpand" Minimum="0" Maximum="10" Value="5" ValueChanged="slider_ValueChanged"></Slider>
-    </StackLayout>
+    <Grid RowDefinitions="*,Auto">
 
+        <!-- background: sky color by the weather, clouds photo and a soft light in the middle -->
+        <BoxView Grid.RowSpan="2">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="{Binding SkyTop}" Offset="0" />
+                    <GradientStop Color="{Binding SkyBottom}" Offset="1" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+        <Image Grid.RowSpan="2" Source="menu1.jpg" Aspect="AspectFill" Opacity="0.3" />
+        <Image Grid.RowSpan="2" Source="overlay.png" Aspect="AspectFill" Opacity="0.8" />
+
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="White">
+            <ScrollView>
+                <Grid RowDefinitions="Auto,Auto,*" Padding="0,0,0,20">
+
+                    <!-- toolbar -->
+                    <Grid ColumnDefinitions="Auto,*,Auto,Auto" Padding="8,8,8,0">
+                        <ImageButton Source="search.png" Style="{StaticResource IconButton}"
+                                     Command="{Binding OpenSearchCommand}" SemanticProperties.Description="Search for a city" />
+                        <ImageButton Grid.Column="2" Source="location.png" Style="{StaticResource IconButton}"
+                                     Command="{Binding UseMyLocationCommand}" SemanticProperties.Description="Weather here" />
+                        <ImageButton Grid.Column="3" Source="refresh.png" Style="{StaticResource IconButton}"
+                                     Command="{Binding RefreshCommand}" SemanticProperties.Description="Refresh"
+                                     IsVisible="{Binding IsBusy, Converter={StaticResource Invert}}" />
+                        <ActivityIndicator Grid.Column="3" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                                           Color="White" WidthRequest="22" HeightRequest="22" Margin="11" />
+                    </Grid>
+
+                    <!-- error -->
+                    <Border Grid.Row="1" IsVisible="{Binding Error, Converter={StaticResource IsNotNull}}"
+                            Margin="20,8,20,0" Padding="14,10" StrokeThickness="0"
+                            BackgroundColor="#66000000" StrokeShape="RoundRectangle 12">
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <Label Text="{Binding Error}" TextColor="White" FontSize="13" VerticalOptions="Center" />
+                            <Button Grid.Column="1" Text="Retry" Command="{Binding RetryCommand}"
+                                    BackgroundColor="#33FFFFFF" TextColor="White" FontSize="13"
+                                    Padding="14,0" HeightRequest="34" CornerRadius="17" />
+                        </Grid>
+                    </Border>
+
+                    <!-- current weather -->
+                    <VerticalStackLayout Grid.Row="2" Spacing="18" Padding="0,24,0,0" VerticalOptions="Center"
+                                         IsVisible="{Binding IsLoaded}">
+                        <HorizontalStackLayout Spacing="36" HorizontalOptions="Center">
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="6">
+                                <Image Source="{Binding Icon}" WidthRequest="70" HeightRequest="70" />
+                                <Label Text="{Binding Description}" Style="{StaticResource Caption}" FontSize="12"
+                                       MaximumWidthRequest="130" HorizontalTextAlignment="Center" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout VerticalOptions="Center" Spacing="4">
+                                <Label Text="{Binding City}" TextColor="White" FontSize="22" FontAttributes="Bold"
+                                       HorizontalOptions="Center" MaximumWidthRequest="190"
+                                       HorizontalTextAlignment="Center" LineBreakMode="WordWrap" />
+                                <Label Text="{Binding Date}" Style="{StaticResource Caption}" FontSize="12" />
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
+
+                        <VerticalStackLayout Spacing="0">
+                            <Grid HorizontalOptions="Center" ColumnDefinitions="Auto,Auto">
+                                <Label Text="{Binding Temperature}" TextColor="White" FontSize="112"
+                                       FontAttributes="None" VerticalOptions="Start" />
+                                <Label Grid.Column="1" Text="°" TextColor="White" FontSize="72" Margin="2,6,0,0"
+                                       VerticalOptions="Start" />
+                            </Grid>
+                            <Label Text="{Binding FeelsLike}" Style="{StaticResource Caption}" FontSize="12"
+                                   Margin="0,-14,0,0" CharacterSpacing="1" />
+                        </VerticalStackLayout>
+
+                        <Grid ColumnDefinitions="*,*,*,*" WidthRequest="340" Margin="0,10,0,0">
+                            <VerticalStackLayout Spacing="8">
+                                <Image Source="humidity.png" HeightRequest="25" />
+                                <Label Text="{Binding Humidity}" Style="{StaticResource Value}" />
+                                <Label Text="Humidity" Style="{StaticResource Caption}" Margin="0,-6,0,0" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="1" Spacing="8">
+                                <Image Source="wind.png" HeightRequest="25" />
+                                <Label Text="{Binding Wind}" Style="{StaticResource Value}" />
+                                <Label Text="Wind" Style="{StaticResource Caption}" Margin="0,-6,0,0" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="2" Spacing="8">
+                                <Image Source="gauge.png" HeightRequest="25" />
+                                <Label Text="{Binding Pressure}" Style="{StaticResource Value}" />
+                                <Label Text="Pressure" Style="{StaticResource Caption}" Margin="0,-6,0,0" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Grid.Column="3" Spacing="8">
+                                <Image Source="cloudiness.png" HeightRequest="25" />
+                                <Label Text="{Binding Cloudiness}" Style="{StaticResource Value}" />
+                                <Label Text="Cloudiness" Style="{StaticResource Caption}" Margin="0,-6,0,0" />
+                            </VerticalStackLayout>
+                        </Grid>
+
+                        <Label Text="{Binding Updated}" Style="{StaticResource Caption}" FontSize="11" Opacity="0.6" />
+                    </VerticalStackLayout>
+
+                    <ActivityIndicator Grid.Row="2" IsRunning="True" Color="White" WidthRequest="48" HeightRequest="48"
+                                       VerticalOptions="Center" HorizontalOptions="Center"
+                                       IsVisible="{Binding IsFirstLoading}" />
+                </Grid>
+            </ScrollView>
+        </RefreshView>
+
+        <!-- next four days, brighter to the right as in the first version -->
+        <Grid Grid.Row="1" HeightRequest="160" ColumnDefinitions="*,*,*,*" IsVisible="{Binding IsLoaded}">
+            <views:DayTile Grid.Column="0" BindingContext="{Binding Days[0]}" />
+            <views:DayTile Grid.Column="1" BindingContext="{Binding Days[1]}" />
+            <views:DayTile Grid.Column="2" BindingContext="{Binding Days[2]}" />
+            <views:DayTile Grid.Column="3" BindingContext="{Binding Days[3]}" />
+        </Grid>
+
+        <!-- city search -->
+        <Grid Grid.RowSpan="2" IsVisible="{Binding IsSearchOpen}" BackgroundColor="#B3161B2E" Padding="16,12">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseSearchCommand}" />
+            </Grid.GestureRecognizers>
+            <Border VerticalOptions="Start" Padding="0" StrokeThickness="0" BackgroundColor="#F2FFFFFF"
+                    StrokeShape="RoundRectangle 18" MaximumHeightRequest="520">
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer /> <!-- taps inside don't close the search -->
+                </Border.GestureRecognizers>
+                <Grid RowDefinitions="Auto,Auto,*,Auto">
+                    <Grid ColumnDefinitions="*,Auto" Padding="16,8,6,0">
+                        <Entry x:Name="SearchEntry" Text="{Binding SearchText}" Placeholder="City, for example Almaty"
+                               ReturnType="Search" ReturnCommand="{Binding SelectFirstResultCommand}"
+                               ClearButtonVisibility="WhileEditing" FontSize="16"
+                               TextColor="#1F2540" PlaceholderColor="#8A90A8" />
+                        <Button Grid.Column="1" Text="✕" Command="{Binding CloseSearchCommand}" BackgroundColor="Transparent"
+                                TextColor="#5A6080" FontSize="18" WidthRequest="44" Padding="0" />
+                    </Grid>
+                    <ActivityIndicator Grid.Row="1" IsRunning="{Binding IsSearching}" IsVisible="{Binding IsSearching}"
+                                       Color="#5A6AA3" HeightRequest="24" Margin="0,4" />
+                    <CollectionView Grid.Row="2" ItemsSource="{Binding SearchResults}" SelectionMode="Single"
+                                    SelectedItem="{Binding SelectedResult}">
+                        <CollectionView.EmptyView>
+                            <Label Text="{Binding SearchMessage}" TextColor="#6B7190" FontSize="14"
+                                   HorizontalOptions="Center" Margin="16,18" HorizontalTextAlignment="Center" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="core:Place">
+                                <Grid Padding="18,10" RowDefinitions="Auto,Auto"
+                                      SemanticProperties.Description="{Binding Title}">
+                                    <Label Text="{Binding Name}" TextColor="#1F2540" FontSize="16" FontAttributes="Bold" />
+                                    <Label Grid.Row="1" Text="{Binding Details}" TextColor="#6B7190" FontSize="13" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Button Grid.Row="3" Text="📍  Weather at my location" Command="{Binding UseMyLocationCommand}"
+                            Margin="12" CornerRadius="12" BackgroundColor="#5A6AA3" TextColor="White" FontSize="14" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </ContentPage>

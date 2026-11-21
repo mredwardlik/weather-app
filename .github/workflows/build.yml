@@ -30,11 +30,7 @@ jobs:
           distribution: microsoft
           java-version: 21
       - run: dotnet workload install maui-android
-      - name: Install the Android platform the app targets
-        run: >
-          dotnet build WeatherApp -t:InstallAndroidDependencies -p:AppTargetFramework=net10.0-android
-          -p:AndroidSdkDirectory="$ANDROID_HOME" -p:AcceptAndroidSDKLicenses=True
-      - run: dotnet build WeatherApp -c Release -p:AppTargetFramework=net10.0-android -p:AndroidSdkDirectory="$ANDROID_HOME"
+      - run: dotnet build WeatherApp -c Release -p:AppTargetFramework=net10.0-android
 
   windows:
     runs-on: windows-latest
